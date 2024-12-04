@@ -1,0 +1,8 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = true
+[remote "origin"]
+	url = https://github.com/Rayanekdr/RayaneProjectNetflix.git
+	fetch = +refs/*:refs/*
+	mirror = true
