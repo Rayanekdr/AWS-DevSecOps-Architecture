@@ -2,6 +2,7 @@
 RayanePE/
 .terraform/
 **/.terraform/*
+RayaneProjectNetflix.git/
 
 # Ignore specific files containing sensitive information
 terraform.tfstate
