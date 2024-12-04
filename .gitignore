@@ -1,5 +1,6 @@
 # Ignore the RayanePE directory
 RayanePE/
+.terraform/
 
 # Ignore specific files containing sensitive information
 terraform.tfstate
