@@ -7,7 +7,7 @@ terraform.tfstate.backup
 emailP.txt
 RayaneFlixCLi.txt
 RayaneSSH.pem
-
+.terraform.lock.hcl
 # Ignore any other sensitive or temporary files
 *.log
 *.bak
