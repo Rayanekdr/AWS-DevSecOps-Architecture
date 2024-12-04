@@ -1,6 +1,7 @@
 # Ignore the RayanePE directory
 RayanePE/
 .terraform/
+**/.terraform/*
 
 # Ignore specific files containing sensitive information
 terraform.tfstate
@@ -8,7 +9,7 @@ terraform.tfstate.backup
 emailP.txt
 RayaneFlixCLi.txt
 RayaneSSH.pem
-terraform.lock.hcl
+.terraform.lock.hcl
 # Ignore any other sensitive or temporary files
 *.log
 *.bak
