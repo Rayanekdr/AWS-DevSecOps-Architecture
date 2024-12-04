@@ -1,0 +1,14 @@
+# Ignore the RayanePE directory
+RayanePE/
+
+# Ignore specific files containing sensitive information
+terraform.tfstate
+terraform.tfstate.backup
+emailP.txt
+RayaneFlixCLi.txt
+RayaneSSH.pem
+
+# Ignore any other sensitive or temporary files
+*.log
+*.bak
+*.tmp
