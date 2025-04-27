@@ -1,5 +1,4 @@
 # Ignore the RayanePE directory
-RayanePE/
 .terraform/
 **/.terraform/*
 RayaneProjectNetflix.git/

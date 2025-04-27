@@ -1,0 +1,152 @@
+- hosts: localhost
+  connection: local
+  
+
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Upgrade all packages
+      apt:
+        upgrade: dist
+        update_cache: yes
+
+    - name: Install npm
+      apt:
+        name: npm
+        state: present
+
+    - name: Clone the Netflix clone repository
+      git:
+        repo: https://github.com/Rayanekdr/UTT-RayaneFlix-Project.git
+        dest: /home/ubuntu/UTT-RayaneFlix-Project
+
+    - name: Install Docker
+      apt:
+        name: docker.io
+        state: present
+
+    - name: Add user to Docker group
+      user:
+        name: "ubuntu"
+        groups: docker
+        append: yes
+
+    - name: Adjust Docker socket permissions
+      file:
+        path: /var/run/docker.sock
+        mode: '0660'
+        owner: root
+        group: docker
+
+    - name: Run SonarQube
+      command: docker run -d --name sonar -p 9000:9000 sonarqube:lts-community
+
+    - name: Install prerequisites for Trivy
+      apt:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - wget
+        - apt-transport-https
+        - gnupg
+        - lsb-release
+
+    - name: Add Trivy GPG key
+      shell: |
+        wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | sudo apt-key add -
+      ignore_errors: yes
+
+    - name: Add Trivy repository
+      shell: echo "deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/trivy.list
+
+    - name: Update apt cache after adding Trivy repo
+      apt:
+        update_cache: yes
+
+    - name: Install Trivy
+      apt:
+        name: trivy
+        state: present
+
+    - name: Install fontconfig and OpenJDK 17
+      apt:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - fontconfig
+        - openjdk-17-jre
+
+    - name: Verify Java installation
+      command: java -version
+
+    - name: Add Jenkins repository key
+      command: wget -O /usr/share/keyrings/jenkins-keyring.asc https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+
+    - name: Add Jenkins repository
+      shell: echo "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/" | sudo tee /etc/apt/sources.list.d/jenkins.list > /dev/null
+
+    - name: Update apt cache after adding Jenkins repo
+      apt:
+        update_cache: yes
+
+    - name: Install Jenkins
+      apt:
+        name: jenkins
+        state: present
+
+    - name: Start Jenkins
+      systemd:
+        name: jenkins
+        state: started
+        enabled: true
+
+    - name: Wait for Jenkins to be up
+      uri:
+        url: http://localhost:8080/login
+        status_code: 200
+      register: result
+      until: result.status == 200
+      retries: 30
+      delay: 10
+
+
+    # Add Jenkins user to Docker group and restart Jenkins
+    - name: Add Jenkins user to Docker group
+      user:
+        name: "jenkins"
+        groups: docker
+        append: yes
+
+    - name: Restart Jenkins
+      systemd:
+        name: jenkins
+        state: restarted
+
+
+    - name: Run SonarQube setup script
+      shell: |
+        bash /home/ubuntu/setup_sonarqube.sh
+
+    - name: Load SonarQube token
+      shell: |
+        source /tmp/sonarqube_token.env
+        echo $SONARQUBE_TOKEN
+      register: sonarqube_token
+
+    - name: Set SonarQube token as a fact
+      set_fact:
+        SONARQUBE_TOKEN: "{{ sonarqube_token.stdout }}"
+
+    - name: Execute Jenkins configuration script
+      shell: |
+        chmod +x /home/ubuntu/jenkins_conf.sh
+        /bin/bash -c "source /home/ubuntu/jenkins_conf.sh"
+      args:
+        chdir: /home/ubuntu/
+      register: jenkins_conf_output
+
+    - name: Debug Jenkins configuration output
+      debug:
+        var: jenkins_conf_output.stdout

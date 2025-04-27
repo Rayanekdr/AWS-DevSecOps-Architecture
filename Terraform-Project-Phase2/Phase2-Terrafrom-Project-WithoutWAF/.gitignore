@@ -1,0 +1,4 @@
+# Terraform sensitive files
+*.tfstate
+*.tfstate.backup
+.terraform/
