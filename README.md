@@ -4,19 +4,9 @@ RayaneFlix is a fully automated, secure, and highly available cloud infrastructu
 
 The architecture uses Infrastructure as Code (IaC) with Terraform and Ansible, a complete CI/CD pipeline with Jenkins and SonarQube, and includes dynamic security analysis with SAST, DAST, and dependency scanning tools.
 
-<div align="center">
-  <img src="./public/assets/DevSecOps.png" alt="Logo" width="100%" height="100%">
-
-  <br>
-  <a href="http://netflix-clone-with-tmdb-using-react-mui.vercel.app/">
-    <img src="./public/assets/netflix-logo.png" alt="Logo" width="100" height="32">
-  </a>
-</div>
-
-<br />
 
 <div align="center">
-  <img src="./public/assets/home-page.png" alt="Logo" width="100%" height="100%">
+  <img src="./public/assets/overview-netflix.png" alt="Logo" width="100%" height="100%">
   <p align="center">Home Page</p>
 </div>
 ---
@@ -49,5 +39,18 @@ The architecture uses Infrastructure as Code (IaC) with Terraform and Ansible, a
 
 ---
 
-## 🏗️ Architecture Overview
+## 🏗️ Architecture Overview Part 1
+
+<div align="center">
+  <img src="./public/assets/AWS-Architecture_Part1.png" alt="Logo" width="100%" height="100%">
+</div>
+
+
+## 🏗️ Architecture Overview Part 2
+
+<div align="center">
+  <img src="./public/assets/AWS-Final-ArchitecturePart2.png" alt="Logo" width="100%" height="100%">
+</div>
+
+
 
