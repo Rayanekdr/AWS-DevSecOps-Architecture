@@ -41,14 +41,14 @@ The architecture uses Infrastructure as Code (IaC) with Terraform and Ansible, a
 
 ## 🏗️ Architecture Overview
 
-### Part 1: Initial Simple Architecture
+### Part 1: Initial Architecture Part 1
 
 <div align="center">
   <img src="./public/assets/AWS-Architecture_Part1.png" alt="Logo" width="100%" height="100%">
 </div>
 
 In the first phase of the project, a basic AWS infrastructure was deployed to host the streaming web application.  
-It was designed as a simple, quick-to-deploy environment focusing on automation and CI/CD setup.
+It was designed as a simple, quick-to-deploy environment **focusing on automation and CI/CD setup**.
 
 **Main Components:**
 - A **Virtual Private Cloud (VPC)** with a **public subnet**.
