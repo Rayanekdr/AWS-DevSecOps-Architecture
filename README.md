@@ -155,7 +155,7 @@ brew install terraform awscli azure-cli jq
 git clone https://github.com/Rayanekdr/AWS-DevSecOps-Architecture.git
 cd AWS-DevSecOps-Architecture
 ```
-2. **Configure for AWS & tell which AWS profile to use In Terraform Config**
+2. **Configure for AWS & tell which AWS profile to use in Terraform Config**
 
 ```bash
   aws configure --profile CLI_Kali
@@ -170,7 +170,6 @@ Before running the full project, a few manual configurations are necessary to en
 
 **Follow these steps carefully:** 
 
----
 
 ### 1️⃣ Create a TMDB (The Movie Database) API Key
 
@@ -313,15 +312,23 @@ For the **Terraform-Project-Part1**:
 
 ---
 
-## 📷 Screenshots / Diagrams
+
+## 📈 Deployment Workflow Diagram
 
 <div align="center">
-  <img src="./public/assets/flux_execution_ansible.drawio.png" alt="Logo" width="100%" height="100%">
+  <img src="./public/assets/Diagramme_Terrfaorm.png" alt="Deployment Workflow Diagram" width="100%" height="100%">
 </div>
 
+
+
+## 🤖 Automation Architecture Overview with Ansible and Bash Scripts
+
 <div align="center">
-  <img src="./public/assets/Diagramme_Terrfaorm.jpg" alt="Logo" width="100%" height="100%">
+  <img src="./public/assets/flux_execution_ansible.drawio.png" alt="Automation Architecture Overview" width="100%" height="100%">
 </div>
+
+
+
 ---
 ## 🛠️ Technologies Used
 
