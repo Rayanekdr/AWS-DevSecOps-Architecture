@@ -18,7 +18,7 @@
 
     - name: Clone the Netflix clone repository
       git:
-        repo: https://github.com/Rayanekdr/UTT-RayaneFlix-Project.git
+        repo: https://github.com/Rayanekdr/AWS-DevSecOps-Architecture.git
         dest: /home/ubuntu/UTT-RayaneFlix-Project
 
     - name: Install Docker
