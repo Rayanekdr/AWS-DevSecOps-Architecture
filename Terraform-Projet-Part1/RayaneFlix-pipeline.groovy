@@ -15,7 +15,7 @@ pipeline {
         }
         stage('Checkout from Git') {
             steps {
-                git branch: 'main', url: 'https://github.com/Rayanekdr/UTT-RayaneFlix-Project.git'
+                git branch: 'main', url: 'https://github.com/Rayanekdr/AWS-DevSecOps-Architecture.git'
             }
         }
         stage("Sonarqube Analysis") {
