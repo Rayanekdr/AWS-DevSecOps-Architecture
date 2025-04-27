@@ -9,7 +9,7 @@ The architecture uses Infrastructure as Code (IaC) with Terraform and Ansible, a
   <img src="./public/assets/overview-netflix.png" alt="Logo" width="100%" height="100%">
   <p align="center">Home Page</p>
 </div>
----
+
 
 ## 🌟 Project Objectives
 
@@ -318,15 +318,9 @@ For the **Terraform-Project-Part1**:
 
 ## 📷 Screenshots / Diagrams
 
-> You can add here:
-> - AWS Architecture Diagrams
-> - CI/CD Pipeline Screenshots
-> - Security Analysis Reports (SonarQube, Trivy, OWASP Dependency-Check)
-> 
-> (Images can be stored under `/public/assets/` folder and embedded using Markdown.)
+
 
 ---
-
 ## 🛠️ Technologies Used
 
 - **AWS Services:** EC2, VPC, S3, IAM, CloudFront, Route 53, ALB, Lambda, Systems Manager (SSM)
@@ -343,7 +337,7 @@ For the **Terraform-Project-Part1**:
 - **Dynamic Application Security Testing (DAST):** Trivy for container and system vulnerability scanning.
 - **Dependency Vulnerability Scanning:** OWASP Dependency-Check.
 - **IAM and Access Management:** Policies respect the principle of Least Privilege.
-- **No public SSH:** EC2 instances are accessible only via **AWS Systems Manager (SSM)**.
+- **No public SSH:** EC2 instances are accessible only via **AWS Systems Manager (SSM) in the second part of the project**.
 
 ---
 
