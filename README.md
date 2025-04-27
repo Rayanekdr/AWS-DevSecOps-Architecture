@@ -118,3 +118,248 @@ The second phase evolved into a production-grade, fully automated, and secured A
 This final architecture ensures **maximum security**, **resilience**, **scalability**, and **full automation**, making it a production-ready solution aligned with modern DevSecOps best practices.
 
 
+
+
+---
+
+## 🚀 Quick Start Guide
+
+### Prerequisites
+
+- AWS Account with admin permissions
+- Python3.9+ is required.
+- Terraform installed (`>= v1.0.0`) [installed and in your $PATH](https://learn.hashicorp.com/terraform/getting-started/install.html).
+- AWS CLI installed and configured [installed and in your $PATH](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html), and an AWS account with sufficient privileges to create and destroy resources.
+- [jq](https://stedolan.github.io/jq/)
+- Git installed
+- SSH Key Pair in your AWS account
+- TMDB (The Movie Database) API Key & an E-mail App Password for Email Notifications ( **Full explanation is bellow** )
+  
+
+Linux
+```bash
+sudo apt install terraform awscli azure-cli jq -y
+```
+
+Mac
+```bash
+brew install terraform awscli azure-cli jq
+```
+
+
+### Installation
+
+1. **Clone the repository:**
+
+```bash
+git clone https://github.com/Rayanekdr/AWS-DevSecOps-Architecture.git
+cd AWS-DevSecOps-Architecture
+```
+2. **Configure for AWS & tell which AWS profile to use In Terraform Config**
+
+```bash
+  aws configure --profile CLI_Kali
+```
+
+---
+
+
+## ⚙️ Additional Setup Requirements
+
+Before running the full project, a few manual configurations are necessary to ensure correct functioning of the CI/CD pipeline, email notifications, and the streaming app.
+
+**Follow these steps carefully:** 
+
+---
+
+### 1️⃣ Create a TMDB (The Movie Database) API Key
+
+This API key is required to fetch movie data for the RayaneFlix streaming application.
+
+- Go to [TMDB Website](https://www.themoviedb.org/).
+- Log in or create a free account.
+- Go to **Profile → Settings → API**.
+- Click **Create** and accept the terms and conditions.
+- Provide the required information and generate your **API key**.
+- **Save your TMDB API key** for the next steps.
+
+
+### 2️⃣ Create a Gmail App Password (for Email Notifications)
+
+> Gmail will be used to send automated email notifications after pipeline execution.
+
+Follow these steps to generate an App Password:
+
+- Log in to your Gmail account.
+- Go to **Manage your Google Account** → **Security** tab.
+- Under **Signing in to Google**, click **App passwords**.
+- You may need to verify your identity.
+- Select:
+  - **App:** Mail
+  - **Device:** Choose your device or select "Other".
+- Click **Generate** and save the **App Password** (looks like a 16-digit code).
+
+> This password will be used in the next steps.
+
+
+
+### 3️⃣ Modify the Pipeline Configuration
+
+Update the pipeline file to insert your TMDB API Key and Email Address.
+
+Open the file:
+```bash
+nano AWS-DevSecOps-Architecture/Terraform-Projet-Part1/RayaneFlix-pipeline.groovy
+```
+
+**Line 64**: Add your TMDB API key inside the Docker build command.
+```bash
+sh "docker build --build-arg TMDB_V3_API_KEY=<your-key> -t rayaneflix ." 
+```
+**Line 89**: Add your email address where you want to receive pipeline reports.
+
+### 4️⃣ Configure Jenkins Credentials for DockerHub Access
+
+
+Open the Jenkins configuration script:
+```bash
+nano AWS-DevSecOps-Architecture/Terraform-Projet-Part1/jenkins_conf.sh
+```
+
+**Line 211**: Add your DockerHub username and DockerHub password in the credentials block
+```bash
+'DOCKERHUB-Name',
+'YourDocker-Hub-Password'
+```
+> This allows Jenkins to build and push Docker images to your DockerHub repository automatically during the pipeline execution.
+
+
+### 5️⃣ Configure Jenkins Email Notification
+
+> Still inside the same file jenkins_conf.sh:
+
+**Line 234**: Add your Gmail email address for notifications
+
+```bash
+mailer.setSmtpHost("smtp.gmail.com")
+mailer.setDefaultSuffix("your-email@gmail.com")
+mailer.setSmtpAuth("your-email@gmail.com", "${EMAIL_PASSWORD}")
+mailer.setUseSsl(true)
+mailer.setSmtpPort("465")
+mailer.save()
+```
+> Confirm again at Line 345 and Line 346 that your email is correctly set for all notification configurations.
+> This setup ensures Jenkins can send you build status and security analysis reports after each pipeline run.
+
+
+### 6️⃣ Create emailP.txt for Gmail App Password Storage
+
+Create a text file to securely store your Gmail App Password:
+
+```bash
+nano AWS-DevSecOps-Architecture/Terraform-Projet-Part1/emailP.txt
+```
+
+### 7️⃣ Create EC2 SSH Key Pair (RayaneSSH)
+
+Before deploying the infrastructure, you must create an SSH Key Pair to allow Terraform to connect to the EC2 instances during provisioning.
+
+1. Go to your AWS Console → EC2 → Key Pairs.
+
+2. Create a new Key Pair:
+   - **Name:** RayaneSSH
+   - **Type:** RSA
+   - **Format:** `.pem` (for Linux/macOS/WSL)
+  
+    
+3. Download the private key file (`RayaneSSH.pem`) and place it in **Terraform-Projet-Part1** 
+```bash
+cd AWS-DevSecOps-Architecture/Terraform-Projet-Part1
+```
+
+4. Ensure the file permissions are correct:
+
+```bash
+chmod 400 RayaneSSH.pem
+```
+
+
+### 8️⃣ Deploy the Infrastructure with Terraform
+
+
+```bash
+cd AWS-DevSecOps-Architecture/Terraform-Projet-Part1
+terraform init
+terraform apply -auto-approve
+```
+
+
+>  ***No manual configuration is required; everything is fully automated post-deployment***
+
+---
+
+## 🌐 Access Your Services
+
+Once the deployment is complete, you can access the following services if you are in the **Terraform-Project-Part2**:
+
+- **Jenkins:** [https://yourdomain.com/jenkins](https://yourdomain.com/jenkins)
+- **SonarQube:** [https://yourdomain.com/sonarqube](https://yourdomain.com/sonarqube)
+- **Streaming App:** [https://yourdomain.com/streaming](https://yourdomain.com/streaming)
+
+> 🔔 Replace `yourdomain.com` with the domain you configured in **Route 53** inside your Terraform scripts.
+
+For the **Terraform-Project-Part1**:
+
+- **Jenkins:** [http://localhost:8080](http://localhost:8080)
+- **SonarQube:** [http://localhost:9000](http://localhost:9000)
+- **Streaming App:** [http://localhost:8081](http://localhost:8081)
+
+---
+
+## 📷 Screenshots / Diagrams
+
+> You can add here:
+> - AWS Architecture Diagrams
+> - CI/CD Pipeline Screenshots
+> - Security Analysis Reports (SonarQube, Trivy, OWASP Dependency-Check)
+> 
+> (Images can be stored under `/public/assets/` folder and embedded using Markdown.)
+
+---
+
+## 🛠️ Technologies Used
+
+- **AWS Services:** EC2, VPC, S3, IAM, CloudFront, Route 53, ALB, Lambda, Systems Manager (SSM)
+- **Automation Tools:** Terraform, Ansible
+- **CI/CD Tools:** Jenkins, SonarQube
+- **Security Tools:** OWASP Dependency-Check, Trivy, ModSecurity WAF
+- **Scripting:** Bash
+
+---
+
+## 🛡️ Security Focus (DevSecOps)
+
+- **Static Application Security Testing (SAST):** SonarQube.
+- **Dynamic Application Security Testing (DAST):** Trivy for container and system vulnerability scanning.
+- **Dependency Vulnerability Scanning:** OWASP Dependency-Check.
+- **IAM and Access Management:** Policies respect the principle of Least Privilege.
+- **No public SSH:** EC2 instances are accessible only via **AWS Systems Manager (SSM)**.
+
+---
+
+
+## 🤝 Contribution
+
+Pull requests are welcome!  
+For major changes, please open an issue first to discuss what you would like to change.
+
+---
+
+## 📩 Contact
+
+Project made by **Rayane Khadraoui**.
+
+For any questions or collaborations, feel free to contact me at:  
+📧 [rayane.khadraoui@utt.fr](mailto:rayane.khadraoui@utt.fr)
+
+---
