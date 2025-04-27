@@ -70,7 +70,7 @@ This initial setup allowed:
 ### Part 2: Final Secure and Scalable Architecture
 
 <div align="center">
-  <img src="./public/assets/Diagramme_Terrfaorm.jpg" alt="Logo" width="100%" height="100%">
+  <img src="./public/assets/AWS-Final-ArchitecturePart2.png" alt="Logo" width="100%" height="100%">
 </div>
 
 The second phase evolved into a production-grade, fully automated, and secured AWS architecture following DevSecOps principles.
