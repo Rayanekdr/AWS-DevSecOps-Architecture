@@ -118,8 +118,6 @@ The second phase evolved into a production-grade, fully automated, and secured A
 This final architecture ensures **maximum security**, **resilience**, **scalability**, and **full automation**, making it a production-ready solution aligned with modern DevSecOps best practices.
 
 
-
-
 ---
 
 ## 🚀 Quick Start Guide
