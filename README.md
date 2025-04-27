@@ -106,6 +106,9 @@ The second phase evolved into a production-grade, fully automated, and secured A
   - **OWASP Dependency-Check** for dependency vulnerabilities.
   - **Trivy** for container and system scanning (DAST).
   - **Automated email notifications** after each CI/CD execution with build logs and security reports.
+ <div align="center">
+  <img src="./public/assets/Pipeline.drawio.png" alt="Logo" width="100%" height="100%">
+</div>
 
 - **High Availability and Scalability:**
   - Multi-AZ setup for fault tolerance.
