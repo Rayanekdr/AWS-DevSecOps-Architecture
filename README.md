@@ -133,7 +133,7 @@ This final architecture ensures **maximum security**, **resilience**, **scalabil
 - [jq](https://stedolan.github.io/jq/)
 - Git installed
 - SSH Key Pair in your AWS account
-- TMDB (The Movie Database) API Key & an E-mail App Password for Email Notifications ( **Full explanation is bellow** )
+- TMDB The Movie Database **API Key** & an E-mail **App Password** for Email Notifications ( **Full explanations are bellow** )
   
 
 Linux
