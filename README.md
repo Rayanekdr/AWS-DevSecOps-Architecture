@@ -207,30 +207,28 @@ Follow these steps to generate an App Password:
 
 Update the pipeline file to insert your TMDB API Key and Email Address.
 
-Open the file:
-```bash
-nano AWS-DevSecOps-Architecture/Terraform-Projet-Part1/RayaneFlix-pipeline.groovy
-```
-
-**Line 64**: Add your TMDB API key inside the Docker build command.
-```bash
-sh "docker build --build-arg TMDB_V3_API_KEY=<your-key> -t rayaneflix ." 
-```
-**Line 89**: Add your email address where you want to receive pipeline reports.
+1. Open the file:
+   ```bash
+   nano AWS-DevSecOps-Architecture/Terraform-Projet-Part1/RayaneFlix-pipeline.groovy
+   ```
+   - **Line 64**: Add your TMDB API key inside the Docker build command.
+   ```bash
+   sh "docker build --build-arg TMDB_V3_API_KEY=<your-key> -t rayaneflix ."
+   ```
+   - **Line 89**: Add your email address where you want to receive pipeline reports.
 
 ### 4️⃣ Configure Jenkins Credentials for DockerHub Access
 
 
-Open the Jenkins configuration script:
-```bash
-nano AWS-DevSecOps-Architecture/Terraform-Projet-Part1/jenkins_conf.sh
-```
-
-**Line 211**: Add your DockerHub username and DockerHub password in the credentials block
-```bash
-'DOCKERHUB-Name',
-'YourDocker-Hub-Password'
-```
+1. Open the Jenkins configuration script:
+   ```bash
+   nano AWS-DevSecOps-Architecture/Terraform-Projet-Part1/jenkins_conf.sh
+   ```
+   - **Line 211**: Add your DockerHub username and DockerHub password in the credentials block
+     ```
+     'DOCKERHUB-Name',
+     'YourDocker-Hub-Password'
+     ```
 > This allows Jenkins to build and push Docker images to your DockerHub repository automatically during the pipeline execution.
 
 
@@ -238,16 +236,15 @@ nano AWS-DevSecOps-Architecture/Terraform-Projet-Part1/jenkins_conf.sh
 
 > Still inside the same file jenkins_conf.sh:
 
-**Line 234**: Add your Gmail email address for notifications
-
-```bash
-mailer.setSmtpHost("smtp.gmail.com")
-mailer.setDefaultSuffix("your-email@gmail.com")
-mailer.setSmtpAuth("your-email@gmail.com", "${EMAIL_PASSWORD}")
-mailer.setUseSsl(true)
-mailer.setSmtpPort("465")
-mailer.save()
-```
+  - **Line 234**: Add your Gmail email address for notifications
+    ```bash
+    mailer.setSmtpHost("smtp.gmail.com")
+    mailer.setDefaultSuffix("your-email@gmail.com")
+    mailer.setSmtpAuth("your-email@gmail.com", "${EMAIL_PASSWORD}")
+    mailer.setUseSsl(true)
+    mailer.setSmtpPort("465")
+    mailer.save()
+    ```
 > Confirm again at Line 345 and Line 346 that your email is correctly set for all notification configurations.
 > This setup ensures Jenkins can send you build status and security analysis reports after each pipeline run.
 
@@ -255,10 +252,10 @@ mailer.save()
 ### 6️⃣ Create emailP.txt for Gmail App Password Storage
 
 Create a text file to securely store your Gmail App Password:
+    ```
+    nano AWS-DevSecOps-Architecture/Terraform-Projet-Part1/emailP.txt
+    ```
 
-```bash
-nano AWS-DevSecOps-Architecture/Terraform-Projet-Part1/emailP.txt
-```
 
 ### 7️⃣ Create EC2 SSH Key Pair (RayaneSSH)
 
@@ -273,15 +270,15 @@ Before deploying the infrastructure, you must create an SSH Key Pair to allow Te
   
     
 3. Download the private key file (`RayaneSSH.pem`) and place it in **Terraform-Projet-Part1** 
-```bash
-cd AWS-DevSecOps-Architecture/Terraform-Projet-Part1
-```
+   ```
+   cd AWS-DevSecOps-Architecture/Terraform-Projet-Part1
+   ```
 
 4. Ensure the file permissions are correct:
 
-```bash
-chmod 400 RayaneSSH.pem
-```
+   ```
+   chmod 400 RayaneSSH.pem
+   ```
 
 
 ### 8️⃣ Deploy the Infrastructure with Terraform
