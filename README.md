@@ -304,9 +304,12 @@ Once the deployment is complete, you can access the following services if you ar
 
 For the **Terraform-Project-Part1**:
 
-- **Jenkins:** [http://localhost:8080](http://localhost:8080)
-- **SonarQube:** [http://localhost:9000](http://localhost:9000)
-- **Streaming App:** [http://localhost:8081](http://localhost:8081)
+- **Jenkins:** [http://localhost:8080](http://<PublicIPAdresse>:8080)
+- **SonarQube:** [http://localhost:9000](http://<PublicIPAdresse>:9000)
+- **Streaming App:** [http://localhost:8081](http://<PublicIPAdresse>:8081)
+> 🔔 Replace `<PublicIPAdresse>` with the Public IP that will show up in terminal after the Terrafrom Apply will finish Executing.
+>  Also to access to the Jenkins console you will find the password in the ouput of the execution of the Terraform apply
+
 
 ---
 
